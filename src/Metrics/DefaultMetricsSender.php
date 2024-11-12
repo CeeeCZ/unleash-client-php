@@ -2,7 +2,6 @@
 
 namespace Unleash\Client\Metrics;
 
-use Override;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -10,16 +9,15 @@ use Unleash\Client\Configuration\UnleashConfiguration;
 use Unleash\Client\Helper\StringStream;
 use Unleash\Client\Unleash;
 
-final readonly class DefaultMetricsSender implements MetricsSender
+final class DefaultMetricsSender implements MetricsSender
 {
     public function __construct(
-        private ClientInterface $httpClient,
-        private RequestFactoryInterface $requestFactory,
-        private UnleashConfiguration $configuration,
+        private readonly ClientInterface $httpClient,
+        private readonly RequestFactoryInterface $requestFactory,
+        private readonly UnleashConfiguration $configuration,
     ) {
     }
 
-    #[Override]
     public function sendMetrics(MetricsBucket $bucket): void
     {
         if (!$this->configuration->isMetricsEnabled() || !$this->configuration->isFetchingEnabled()) {

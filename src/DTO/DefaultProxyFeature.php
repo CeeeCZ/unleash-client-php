@@ -3,18 +3,17 @@
 namespace Unleash\Client\DTO;
 
 use JsonSerializable;
-use Override;
 use Unleash\Client\Enum\Stickiness;
 
-final readonly class DefaultProxyFeature implements ProxyFeature, JsonSerializable
+final class DefaultProxyFeature implements ProxyFeature, JsonSerializable
 {
-    private string $name;
+    private readonly string $name;
 
-    private bool $enabled;
+    private readonly bool $enabled;
 
-    private Variant $variant;
+    private readonly Variant $variant;
 
-    private bool $impressionData;
+    private readonly bool $impressionData;
 
     /**
      * @param array{
@@ -56,25 +55,21 @@ final readonly class DefaultProxyFeature implements ProxyFeature, JsonSerializab
         $this->variant = new DefaultVariant($response['variant']['name'], $response['variant']['enabled'], 0, Stickiness::DEFAULT, $payload);
     }
 
-    #[Override]
     public function getName(): string
     {
         return $this->name;
     }
 
-    #[Override]
     public function isEnabled(): bool
     {
         return $this->enabled;
     }
 
-    #[Override]
     public function getVariant(): Variant
     {
         return $this->variant;
     }
 
-    #[Override]
     public function hasImpressionData(): bool
     {
         return $this->impressionData;
@@ -83,7 +78,6 @@ final readonly class DefaultProxyFeature implements ProxyFeature, JsonSerializab
     /**
      * @return array<mixed>
      */
-    #[Override]
     public function jsonSerialize(): array
     {
         return [

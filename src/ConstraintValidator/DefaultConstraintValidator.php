@@ -2,7 +2,6 @@
 
 namespace Unleash\Client\ConstraintValidator;
 
-use Override;
 use Unleash\Client\Configuration\Context;
 use Unleash\Client\ConstraintValidator\Operator\Date\DateAfterOperatorValidator;
 use Unleash\Client\ConstraintValidator\Operator\Date\DateBeforeOperatorValidator;
@@ -25,7 +24,6 @@ use Unleash\Client\Exception\OperatorValidatorException;
 
 final class DefaultConstraintValidator implements ConstraintValidator
 {
-    #[Override]
     public function validateConstraint(Constraint $constraint, Context $context): bool
     {
         $field = $constraint->getContextName();

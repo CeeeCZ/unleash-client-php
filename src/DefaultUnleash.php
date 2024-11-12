@@ -2,7 +2,6 @@
 
 namespace Unleash\Client;
 
-use Override;
 use Unleash\Client\Client\RegistrationService;
 use Unleash\Client\Configuration\Context;
 use Unleash\Client\Configuration\UnleashConfiguration;
@@ -24,25 +23,24 @@ use Unleash\Client\Repository\UnleashRepository;
 use Unleash\Client\Strategy\StrategyHandler;
 use Unleash\Client\Variant\VariantHandler;
 
-final readonly class DefaultUnleash implements Unleash
+final class DefaultUnleash implements Unleash
 {
     /**
      * @param iterable<StrategyHandler> $strategyHandlers
      */
     public function __construct(
-        private iterable $strategyHandlers,
-        private UnleashRepository $repository,
-        private RegistrationService $registrationService,
-        private UnleashConfiguration $configuration,
-        private MetricsHandler $metricsHandler,
-        private VariantHandler $variantHandler,
+        private readonly iterable $strategyHandlers,
+        private readonly UnleashRepository $repository,
+        private readonly RegistrationService $registrationService,
+        private readonly UnleashConfiguration $configuration,
+        private readonly MetricsHandler $metricsHandler,
+        private readonly VariantHandler $variantHandler,
     ) {
         if ($configuration->isAutoRegistrationEnabled()) {
             $this->register();
         }
     }
 
-    #[Override]
     public function isEnabled(string $featureName, ?Context $context = null, bool $default = false): bool
     {
         $context ??= $this->configuration->getContextProvider()->getContext();
@@ -65,7 +63,6 @@ final readonly class DefaultUnleash implements Unleash
         return $this->isFeatureEnabled($feature, $context, $default)->isEnabled();
     }
 
-    #[Override]
     public function getVariant(string $featureName, ?Context $context = null, ?Variant $fallbackVariant = null): Variant
     {
         $fallbackVariant ??= $this->variantHandler->getDefaultVariant();
@@ -107,7 +104,6 @@ final readonly class DefaultUnleash implements Unleash
         return $resolvedVariant;
     }
 
-    #[Override]
     public function register(): bool
     {
         return $this->registrationService->register($this->strategyHandlers);

@@ -4,32 +4,28 @@ namespace Unleash\Client\DTO;
 
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\ExpectedValues;
-use Override;
 use Unleash\Client\Enum\Stickiness;
 
-final readonly class DefaultVariant implements Variant
+final class DefaultVariant implements Variant
 {
     /**
      * @param array<VariantOverride> $overrides
      */
     public function __construct(
-        private string $name,
-        private bool $enabled,
-        private int $weight = 0,
-        #[ExpectedValues(valuesFromClass: Stickiness::class)]
-        private string $stickiness = Stickiness::DEFAULT,
-        private ?VariantPayload $payload = null,
-        private ?array $overrides = null,
+        private readonly string $name,
+        private readonly bool $enabled,
+        private readonly int $weight = 0,
+        #[ExpectedValues(valuesFromClass: Stickiness::class)]private readonly string $stickiness = Stickiness::DEFAULT,
+        private readonly ?VariantPayload $payload = null,
+        private readonly ?array $overrides = null,
     ) {
     }
 
-    #[Override]
     public function getName(): string
     {
         return $this->name;
     }
 
-    #[Override]
     public function getPayload(): ?VariantPayload
     {
         return $this->payload;
@@ -39,7 +35,6 @@ final readonly class DefaultVariant implements Variant
      * @phpstan-return array<string|bool|array<string>>
      */
     #[ArrayShape(['name' => 'string', 'enabled' => 'bool', 'payload' => 'mixed'])]
-    #[Override]
     public function jsonSerialize(): array
     {
         $result = [
@@ -54,13 +49,11 @@ final readonly class DefaultVariant implements Variant
         return $result;
     }
 
-    #[Override]
     public function getWeight(): int
     {
         return $this->weight;
     }
 
-    #[Override]
     public function isEnabled(): bool
     {
         return $this->enabled;
@@ -69,14 +62,12 @@ final readonly class DefaultVariant implements Variant
     /**
      * @return array<VariantOverride>
      */
-    #[Override]
     public function getOverrides(): array
     {
         return $this->overrides ?? [];
     }
 
     #[ExpectedValues(valuesFromClass: Stickiness::class)]
-    #[Override]
     public function getStickiness(): string
     {
         return $this->stickiness;

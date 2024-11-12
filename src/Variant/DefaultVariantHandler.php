@@ -3,16 +3,15 @@
 namespace Unleash\Client\Variant;
 
 use JetBrains\PhpStorm\Pure;
-use Override;
 use Unleash\Client\Configuration\Context;
 use Unleash\Client\DTO\DefaultVariant;
 use Unleash\Client\DTO\Variant;
 use Unleash\Client\Enum\Stickiness;
 use Unleash\Client\Stickiness\StickinessCalculator;
 
-final readonly class DefaultVariantHandler implements VariantHandler
+final class DefaultVariantHandler implements VariantHandler
 {
-    private const int VARIANT_HASH_SEED = 86028157;
+    private const VARIANT_HASH_SEED = 86028157;
 
     public function __construct(
         private StickinessCalculator $stickinessCalculator,
@@ -20,7 +19,6 @@ final readonly class DefaultVariantHandler implements VariantHandler
     }
 
     #[Pure]
-    #[Override]
     public function getDefaultVariant(): Variant
     {
         return new DefaultVariant(
@@ -32,7 +30,6 @@ final readonly class DefaultVariantHandler implements VariantHandler
     /**
      * @param array<Variant> $variants
      */
-    #[Override]
     public function selectVariant(array $variants, string $groupId, Context $context): ?Variant
     {
         $totalWeight = 0;

@@ -8,7 +8,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ResourceType;
 
-final readonly class NoEmptyFunctionRule implements Rule
+final class NoEmptyFunctionRule implements Rule
 {
     public function getNodeType(): string
     {

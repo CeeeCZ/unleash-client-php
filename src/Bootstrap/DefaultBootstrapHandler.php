@@ -3,15 +3,13 @@
 namespace Unleash\Client\Bootstrap;
 
 use JsonException;
-use Override;
 use Traversable;
 
-final readonly class DefaultBootstrapHandler implements BootstrapHandler
+final class DefaultBootstrapHandler implements BootstrapHandler
 {
     /**
      * @throws JsonException
      */
-    #[Override]
     public function getBootstrapContents(BootstrapProvider $provider): ?string
     {
         $bootstrap = $provider->getBootstrap();

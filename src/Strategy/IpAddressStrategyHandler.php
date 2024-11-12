@@ -2,7 +2,6 @@
 
 namespace Unleash\Client\Strategy;
 
-use Override;
 use Unleash\Client\Configuration\Context;
 use Unleash\Client\DTO\Strategy;
 use Unleash\Client\Exception\InvalidIpAddressException;
@@ -14,7 +13,6 @@ final class IpAddressStrategyHandler extends AbstractStrategyHandler
     /**
      * @throws MissingArgumentException
      */
-    #[Override]
     public function isEnabled(Strategy $strategy, Context $context): bool
     {
         if (!$ipAddresses = $this->findParameter('IPs', $strategy)) {
@@ -49,7 +47,6 @@ final class IpAddressStrategyHandler extends AbstractStrategyHandler
         return true;
     }
 
-    #[Override]
     public function getStrategyName(): string
     {
         return 'remoteAddress';

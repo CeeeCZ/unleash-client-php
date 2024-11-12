@@ -3,21 +3,19 @@
 namespace Unleash\Client\Metrics;
 
 use DateTimeImmutable;
-use Override;
 use Unleash\Client\Configuration\UnleashConfiguration;
 use Unleash\Client\DTO\Feature;
 use Unleash\Client\DTO\Variant;
 use Unleash\Client\Enum\CacheKey;
 
-final readonly class DefaultMetricsHandler implements MetricsHandler
+final class DefaultMetricsHandler implements MetricsHandler
 {
     public function __construct(
-        private MetricsSender $metricsSender,
-        private UnleashConfiguration $configuration
+        private readonly MetricsSender $metricsSender,
+        private readonly UnleashConfiguration $configuration
     ) {
     }
 
-    #[Override]
     public function handleMetrics(Feature $feature, bool $successful, Variant $variant = null): void
     {
         if (!$this->configuration->isMetricsEnabled()) {

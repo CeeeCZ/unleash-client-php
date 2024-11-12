@@ -5,7 +5,6 @@ namespace Unleash\Client\Repository;
 use Exception;
 use JsonException;
 use LogicException;
-use Override;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -82,12 +81,12 @@ use Unleash\Client\Unleash;
  *       impressionData?: bool,
  *   }
  */
-final readonly class DefaultUnleashRepository implements UnleashRepository
+final class DefaultUnleashRepository implements UnleashRepository
 {
     public function __construct(
-        private ClientInterface $httpClient,
-        private RequestFactoryInterface $requestFactory,
-        private UnleashConfiguration $configuration,
+        private readonly ClientInterface $httpClient,
+        private readonly RequestFactoryInterface $requestFactory,
+        private readonly UnleashConfiguration $configuration,
     ) {
     }
 
@@ -96,7 +95,6 @@ final readonly class DefaultUnleashRepository implements UnleashRepository
      * @throws InvalidArgumentException
      * @throws JsonException
      */
-    #[Override]
     public function findFeature(string $featureName): ?Feature
     {
         $features = $this->getFeatures();
@@ -112,7 +110,6 @@ final readonly class DefaultUnleashRepository implements UnleashRepository
      *
      * @return iterable<Feature>
      */
-    #[Override]
     public function getFeatures(): iterable
     {
         $features = $this->getCachedFeatures();

@@ -4,16 +4,15 @@ namespace Unleash\Client\Bootstrap;
 
 use InvalidArgumentException;
 use JsonException;
-use Override;
 use RuntimeException;
 use SplFileInfo;
 use Throwable;
 use Unleash\Client\Exception\InvalidValueException;
 
-final readonly class FileBootstrapProvider implements BootstrapProvider
+final class FileBootstrapProvider implements BootstrapProvider
 {
     public function __construct(
-        private string|SplFileInfo $file,
+        private readonly string|SplFileInfo $file,
     ) {
     }
 
@@ -23,7 +22,6 @@ final readonly class FileBootstrapProvider implements BootstrapProvider
      *
      * @return array<mixed>
      */
-    #[Override]
     public function getBootstrap(): array
     {
         $filePath = $this->getFilePath($this->file);
