@@ -35,7 +35,7 @@
         "phpstan/phpstan": "^0.12",
         "jetbrains/phpstorm-attributes": "^1.0",
         "phpunit/phpunit": "^8.5",
-        "symfony/http-client": "^6.2",
+        "symfony/http-client": "^5.3.3 || ^6.2",
         "nyholm/psr7": "^1.0",
         "symfony/cache": "^3.4"
     },
