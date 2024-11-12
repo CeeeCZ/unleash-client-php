@@ -4,17 +4,17 @@ namespace Unleash\Client\Enum;
 
 final class ContextField
 {
-    public const string USER_ID = 'userId';
+    public const USER_ID = 'userId';
 
-    public const string SESSION_ID = 'sessionId';
+    public const SESSION_ID = 'sessionId';
 
-    public const string IP_ADDRESS = 'remoteAddress';
+    public const IP_ADDRESS = 'remoteAddress';
 
-    public const string ENVIRONMENT = 'environment';
+    public const ENVIRONMENT = 'environment';
 
-    public const string REMOTE_ADDRESS = self::IP_ADDRESS;
+    public const REMOTE_ADDRESS = self::IP_ADDRESS;
 
-    public const string HOSTNAME = 'hostname';
+    public const HOSTNAME = 'hostname';
 
-    public const string CURRENT_TIME = 'currentTime';
+    public const CURRENT_TIME = 'currentTime';
 }
