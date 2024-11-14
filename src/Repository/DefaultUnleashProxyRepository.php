@@ -112,7 +112,7 @@ final class DefaultUnleashProxyRepository implements ProxyRepository
             $query['properties'][$key] = $value;
         }
 
-        return urldecode(http_build_query($query));
+        return urldecode(http_build_query($query, '', '&', PHP_QUERY_RFC3986));
     }
 
     private function addQuery(string $url, string $query): string
